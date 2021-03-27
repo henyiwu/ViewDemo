@@ -4,7 +4,7 @@ import android.graphics.*
 import android.util.Log
 import androidx.annotation.IntDef
 
-abstract class BaseSticker(private var bitmap: Bitmap) : IOperation{
+abstract class BaseSticker(var bitmap: Bitmap) : IOperation{
 
     private var mMatrix: Matrix = Matrix()
     protected val mPadding = 5
@@ -57,7 +57,7 @@ abstract class BaseSticker(private var bitmap: Bitmap) : IOperation{
     }
 
     override fun delete() {
-        Log.d("west", "onDelete")
+        bitmap.recycle()
     }
 
     override fun onDraw(canvas: Canvas, paint: Paint) {

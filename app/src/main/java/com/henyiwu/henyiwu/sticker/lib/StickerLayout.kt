@@ -5,6 +5,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.abs
 
 class StickerLayout : View, View.OnTouchListener{
 
@@ -38,6 +39,7 @@ class StickerLayout : View, View.OnTouchListener{
                 }
                 mSticker = getDeleteBtn(event.x, event.y)
                 if (mSticker != null && mSticker?.isFocus() == true) {
+                    mStickerList.remove(mSticker!!)
                     mSticker?.delete()
                     mSticker = null
                 }
@@ -87,9 +89,44 @@ class StickerLayout : View, View.OnTouchListener{
     }
 
     fun addSticker(sticker: Sticker) {
+        addSticker(sticker, true)
+    }
+
+    fun addSticker(sticker: Sticker, centerInLayout: Boolean = true) {
         mStickerList.add(sticker)
         setFocusSticker(sticker)
+        if (centerInLayout) {
+            translateSticker(sticker)
+            scaleSticker(sticker)
+        }
         invalidate()
+    }
+
+    /**
+     * 初始化图片时候平移到父布局中间
+     */
+    private fun translateSticker(sticker: Sticker) {
+        val bmpWidth = sticker.bitmap.width
+        val bmpHeight = sticker.bitmap.height
+        val layoutWidth = this.width
+        val layoutHeight = this.height
+        var tranX = 0f
+        var tranY = 0f
+        if (bmpWidth < layoutWidth && bmpHeight > layoutHeight) {
+            tranX = (layoutWidth - bmpWidth) / 2.toFloat()
+            tranY = (layoutHeight - bmpHeight) / 2.toFloat()
+        }
+        sticker.translate(tranX, tranY)
+    }
+
+    private fun scaleSticker(sticker: Sticker) {
+        if (sticker.bitmap.height > sticker.bitmap.width) {
+            val btmHeight = sticker.bitmap.height
+            val layoutHeight = this.height.toFloat()
+            val targetHeight = layoutHeight * 3 / 4
+            val rate: Float = targetHeight / btmHeight
+                    sticker.scale(rate, rate)
+        }
     }
 
     private fun setFocusSticker(targetSticker: Sticker?) {

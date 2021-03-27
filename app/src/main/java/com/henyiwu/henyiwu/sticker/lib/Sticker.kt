@@ -2,12 +2,15 @@ package com.henyiwu.henyiwu.sticker.lib
 
 import android.content.Context
 import android.graphics.*
+import android.util.DisplayMetrics
 import android.view.MotionEvent
+import com.example.baselib.ScreenUtils
 import com.henyiwu.henyiwu.R
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
-class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
+class Sticker(val context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
 
     private var mLastSinglePoint = PointF() // 上一次单指触摸屏幕的坐标
     private var mLastDistanceVector = PointF() // 上一次双指之间的向量
@@ -21,16 +24,16 @@ class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
     private var mSecondPoint = PointF()
 
     private var mReverseBound = RectF(
-            (-reverseBtm.width * 2 - mPadding).toFloat(),
-            (-reverseBtm.height * 2 - mPadding).toFloat(),
-            (reverseBtm.width * 2 + mPadding).toFloat(),
-            (reverseBtm.height * 2 + mPadding).toFloat()
+            (-reverseBtm.width - mPadding).toFloat(),
+            (-reverseBtm.height - mPadding).toFloat(),
+            (reverseBtm.width + mPadding).toFloat(),
+            (reverseBtm.height + mPadding).toFloat()
     )
     private var mDeleteBound = RectF(
-            (-deleteBtn.width * 2 - mPadding).toFloat(),
-            (-deleteBtn.height * 2 - mPadding).toFloat(),
-            (deleteBtn.width * 2 + mPadding).toFloat(),
-            (deleteBtn.height * 2 + mPadding).toFloat()
+            (-deleteBtn.width - mPadding).toFloat(),
+            (-deleteBtn.height - mPadding).toFloat(),
+            (deleteBtn.width + mPadding).toFloat(),
+            (deleteBtn.height + mPadding).toFloat()
     )
 
     private fun reset() {
@@ -53,8 +56,8 @@ class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
                     mFirstPointF.set(event.getX(0), event.getY(0))
                     mSecondPoint.set(event.getX(1), event.getY(1))
                     mLastDistanceVector.set(
-                        mFirstPointF.x - mSecondPoint.x,
-                        mFirstPointF.y - mSecondPoint.y
+                            mFirstPointF.x - mSecondPoint.x,
+                            mFirstPointF.y - mSecondPoint.y
                     )
                     mLastDistance = calculateDistance(mFirstPointF, mSecondPoint)
                 }
@@ -62,8 +65,8 @@ class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
             MotionEvent.ACTION_MOVE -> {
                 if (mode == OperationMode.MODE_SINGLE) {
                     translate(
-                        event.x - mLastSinglePoint.x,
-                        event.y - mLastSinglePoint.y
+                            event.x - mLastSinglePoint.x,
+                            event.y - mLastSinglePoint.y
                     )
                     mLastSinglePoint.set(event.x, event.y)
                 }
@@ -72,7 +75,9 @@ class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
                     mSecondPoint.set(event.getX(1), event.getY(1))
                     val distance = calculateDistance(mFirstPointF, mSecondPoint)
                     val scaleFactor = distance / mLastDistance
-                    scale(scaleFactor, scaleFactor)
+                    if (scaleFactor > 1 || !isSizeLimit()) {
+                        scale(scaleFactor, scaleFactor)
+                    }
                     mLastDistance = distance
                     mDistanceVector.set(mFirstPointF.x - mSecondPoint.x, mFirstPointF.y - mSecondPoint.y)
                     val degrees = calculateDegrees(mLastDistanceVector, mDistanceVector)
@@ -84,6 +89,12 @@ class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
                 reset()
             }
         }
+    }
+
+    private fun isSizeLimit(): Boolean {
+        val x = abs(mDstPoints[0] - mDstPoints[2])
+        val y = abs(mDstPoints[1] - mDstPoints[3])
+        return sqrt((x * x + y * y).toDouble()) <= 200
     }
 
     /**
