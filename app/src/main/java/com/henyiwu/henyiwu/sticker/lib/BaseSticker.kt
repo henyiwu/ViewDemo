@@ -37,20 +37,24 @@ abstract class BaseSticker(var bitmap: Bitmap) : IOperation{
 
     override fun translate(dx: Float, dy: Float) {
         mMatrix.postTranslate(dx, dy)
+        Log.d("west", "translate dx = $dx, dy = $dy")
         updatePoints()
     }
 
     override fun scale(sx: Float, sy: Float) {
+        Log.d("west", "translate dx = $sx, dy = $sy")
         mMatrix.postScale(sx, sy, mMidPointF.x, mMidPointF.y)
         updatePoints()
     }
 
     override fun rotate(degree: Float) {
+        Log.d("west", "rotate degree = $degree")
         mMatrix.postRotate(degree, mMidPointF.x, mMidPointF.y)
         updatePoints()
     }
 
     override fun reverse() {
+        Log.d("west", "reverse")
         mMatrix.preScale(-1f, 1f)
         mMatrix.preTranslate(-bitmap.width.toFloat(), 0f)
         updatePoints()

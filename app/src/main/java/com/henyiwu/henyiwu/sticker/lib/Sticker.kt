@@ -10,7 +10,7 @@ import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.sqrt
 
-class Sticker(val context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
+class Sticker(context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
 
     private var mLastSinglePoint = PointF() // 上一次单指触摸屏幕的坐标
     private var mLastDistanceVector = PointF() // 上一次双指之间的向量
@@ -24,16 +24,16 @@ class Sticker(val context: Context, bitmap: Bitmap) : BaseSticker(bitmap){
     private var mSecondPoint = PointF()
 
     private var mReverseBound = RectF(
-            (-reverseBtm.width - mPadding).toFloat(),
-            (-reverseBtm.height - mPadding).toFloat(),
-            (reverseBtm.width + mPadding).toFloat(),
-            (reverseBtm.height + mPadding).toFloat()
+            -reverseBtm.width.toFloat()/2,
+            -reverseBtm.height.toFloat()/2,
+            reverseBtm.width.toFloat()/2,
+            reverseBtm.height.toFloat()/2
     )
     private var mDeleteBound = RectF(
-            (-deleteBtn.width - mPadding).toFloat(),
-            (-deleteBtn.height - mPadding).toFloat(),
-            (deleteBtn.width + mPadding).toFloat(),
-            (deleteBtn.height + mPadding).toFloat()
+            -deleteBtn.width.toFloat()/2,
+            -deleteBtn.height.toFloat()/2,
+            deleteBtn.width.toFloat()/2,
+            deleteBtn.height.toFloat()/2
     )
 
     private fun reset() {

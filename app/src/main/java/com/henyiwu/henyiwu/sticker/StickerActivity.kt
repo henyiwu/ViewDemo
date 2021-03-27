@@ -14,7 +14,7 @@ class StickerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sticker)
         Handler(Looper.getMainLooper()).post {
-            val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.wzp)
+            val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.asdf)
             val sticker = Sticker(this, bitmap)
             sticker_layout.addSticker(sticker)
         }

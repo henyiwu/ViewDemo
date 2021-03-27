@@ -92,6 +92,9 @@ class StickerLayout : View, View.OnTouchListener{
         addSticker(sticker, true)
     }
 
+    /**
+     * @param centerInLayout 添加的图片放在布局中间
+     */
     fun addSticker(sticker: Sticker, centerInLayout: Boolean = true) {
         mStickerList.add(sticker)
         setFocusSticker(sticker)
@@ -110,12 +113,8 @@ class StickerLayout : View, View.OnTouchListener{
         val bmpHeight = sticker.bitmap.height
         val layoutWidth = this.width
         val layoutHeight = this.height
-        var tranX = 0f
-        var tranY = 0f
-        if (bmpWidth < layoutWidth && bmpHeight > layoutHeight) {
-            tranX = (layoutWidth - bmpWidth) / 2.toFloat()
-            tranY = (layoutHeight - bmpHeight) / 2.toFloat()
-        }
+        val tranX: Float = (layoutWidth - bmpWidth) / 2.toFloat()
+        val tranY: Float = (layoutHeight - bmpHeight) / 2.toFloat()
         sticker.translate(tranX, tranY)
     }
 
@@ -125,7 +124,13 @@ class StickerLayout : View, View.OnTouchListener{
             val layoutHeight = this.height.toFloat()
             val targetHeight = layoutHeight * 3 / 4
             val rate: Float = targetHeight / btmHeight
-                    sticker.scale(rate, rate)
+            sticker.scale(rate, rate)
+        } else {
+            val btmWidth = sticker.bitmap.width.toFloat()
+            val layoutWidth = this.width.toFloat()
+            val targetWidth = layoutWidth * 3 / 4
+            val rate: Float = targetWidth / btmWidth
+            sticker.scale(rate, rate)
         }
     }
 
