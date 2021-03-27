@@ -1,8 +1,8 @@
 package com.henyiwu.henyiwu.sticker.lib
 
 import android.graphics.*
-import android.util.Log
 import androidx.annotation.IntDef
+import com.example.baselib.LogUtils
 
 abstract class BaseSticker(var bitmap: Bitmap) : IOperation{
 
@@ -37,24 +37,24 @@ abstract class BaseSticker(var bitmap: Bitmap) : IOperation{
 
     override fun translate(dx: Float, dy: Float) {
         mMatrix.postTranslate(dx, dy)
-        Log.d("west", "translate dx = $dx, dy = $dy")
+        LogUtils.debugLog("translate dx = $dx, dy = $dy")
         updatePoints()
     }
 
     override fun scale(sx: Float, sy: Float) {
-        Log.d("west", "translate dx = $sx, dy = $sy")
+        LogUtils.debugLog("translate dx = $sx, dy = $sy")
         mMatrix.postScale(sx, sy, mMidPointF.x, mMidPointF.y)
         updatePoints()
     }
 
     override fun rotate(degree: Float) {
-        Log.d("west", "rotate degree = $degree")
+        LogUtils.debugLog("rotate degree = $degree")
         mMatrix.postRotate(degree, mMidPointF.x, mMidPointF.y)
         updatePoints()
     }
 
     override fun reverse() {
-        Log.d("west", "reverse")
+        LogUtils.debugLog("reverse")
         mMatrix.preScale(-1f, 1f)
         mMatrix.preTranslate(-bitmap.width.toFloat(), 0f)
         updatePoints()
