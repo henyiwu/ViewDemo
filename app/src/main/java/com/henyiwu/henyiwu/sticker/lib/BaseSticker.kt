@@ -2,7 +2,7 @@ package com.henyiwu.henyiwu.sticker.lib
 
 import android.graphics.*
 import androidx.annotation.IntDef
-import com.example.baselib.LogUtils
+import com.example.baselib.utils.LogUtils
 
 abstract class BaseSticker(var bitmap: Bitmap) : IOperation{
 

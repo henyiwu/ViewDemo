@@ -1,4 +1,4 @@
-package com.example.baselib
+package com.example.baselib.utils
 
 import android.content.Context
 

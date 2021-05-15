@@ -2,9 +2,7 @@ package com.henyiwu.henyiwu.sticker.lib
 
 import android.content.Context
 import android.graphics.*
-import android.util.DisplayMetrics
 import android.view.MotionEvent
-import com.example.baselib.ScreenUtils
 import com.henyiwu.henyiwu.R
 import kotlin.math.abs
 import kotlin.math.atan2
