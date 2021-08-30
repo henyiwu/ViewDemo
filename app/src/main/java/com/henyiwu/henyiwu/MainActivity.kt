@@ -3,10 +3,9 @@ package com.henyiwu.henyiwu
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.Button
 import com.henyiwu.henyiwu.sticker.StickerActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.henyiwu.henyiwu.wave.WaveActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,12 +16,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initSticker() {
-        val button = Button(this)
-        button.text = "贴纸"
-        button.gravity = Gravity.CENTER
-        button.setOnClickListener {
+        findViewById<Button>(R.id.btnSticker).setOnClickListener {
             startActivity(Intent(this, StickerActivity::class.java))
         }
-        ll_root.addView(button)
+        findViewById<Button>(R.id.btnWave).setOnClickListener {
+            startActivity(Intent(this, WaveActivity::class.java))
+        }
     }
 }

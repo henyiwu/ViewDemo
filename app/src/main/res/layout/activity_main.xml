@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/btnSticker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="贴纸"/>
+
+        <Button
+            android:id="@+id/btnWave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="圆角矩形波纹"/>
     </LinearLayout>
 
 </ScrollView>
