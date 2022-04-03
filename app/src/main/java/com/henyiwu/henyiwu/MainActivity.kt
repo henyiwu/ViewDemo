@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.henyiwu.henyiwu.barrage.BarrageActivity
 import com.henyiwu.henyiwu.sticker.StickerActivity
 import com.henyiwu.henyiwu.wave.WaveActivity
 
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.btnWave).setOnClickListener {
             startActivity(Intent(this, WaveActivity::class.java))
+        }
+        findViewById<Button>(R.id.btnBarrage).setOnClickListener {
+            startActivity(Intent(this, BarrageActivity::class.java))
         }
     }
 }

@@ -23,6 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="圆角矩形波纹"/>
+
+        <Button
+            android:id="@+id/btnBarrage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="飘屏/弹幕"/>
     </LinearLayout>
 
 </ScrollView>
