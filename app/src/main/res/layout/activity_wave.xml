@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <com.henyiwu.henyiwu.wave.AudioButtonWaveView
+    <com.henyiwu.customview.wave.AudioButtonWaveView
         android:id="@+id/viewWave"
         android:layout_width="200dp"
         android:layout_height="60dp"/>

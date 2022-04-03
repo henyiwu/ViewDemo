@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.henyiwu.henyiwu.sticker.lib.StickerLayout
+    <com.henyiwu.customview.sticker.lib.StickerLayout
         android:id="@+id/sticker_layout"
         android:background="#9C27B0"
         android:layout_width="match_parent"

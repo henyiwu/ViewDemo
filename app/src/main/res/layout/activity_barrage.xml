@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.henyiwu.henyiwu.barrage.ui.BarrageView
+    <com.henyiwu.customview.barrage.ui.BarrageView
         android:id="@+id/barrageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
